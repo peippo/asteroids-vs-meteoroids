@@ -1,5 +1,7 @@
+import { Fragment } from "react";
 import { PresentationControls } from "@react-three/drei";
-import BoardCell from "./BoardCell";
+import BoardGridCell from "./BoardGridCell";
+import BoardUnit from "./BoardUnit";
 import { boardPositions } from "../utils";
 
 const Board = () => {
@@ -11,7 +13,12 @@ const Board = () => {
 			config={{ mass: 1, tension: 150, friction: 30 }}
 		>
 			{boardPositions.map((position, index) => {
-				return <BoardCell key={index} position={position} />;
+				return (
+					<Fragment key={index}>
+						<BoardGridCell position={position} />)
+						<BoardUnit position={position} />)
+					</Fragment>
+				);
 			})}
 		</PresentationControls>
 	);
