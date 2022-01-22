@@ -1,5 +1,13 @@
+import { Canvas } from "@react-three/fiber";
+import Board from "./components/Board";
+
 const App = () => {
-	return <></>;
+	return (
+		<Canvas>
+			<ambientLight />
+			<Board />
+		</Canvas>
+	);
 };
 
 export default App;
