@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import Board from "./components/Board";
+import Board from "./components/Board/Board";
 import Controls from "./components/Controls";
 
 const App = () => {
