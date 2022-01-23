@@ -1,11 +1,13 @@
 import { Fragment, useState } from "react";
 import BoardGridCell from "./BoardGridCell";
 import BoardUnit from "./BoardUnit";
-import { boardPositions, initialCells } from "../../utils";
+import { boardPositions, checkWinner, initialCells } from "../../utils";
 
 const Board = () => {
 	const [cells, setCells] = useState(initialCells);
 	const [next, setNext] = useState("X");
+
+	const hasWinner = checkWinner(cells);
 
 	const handleUnitClick = (index) => {
 		const newCells = [...cells];
@@ -25,6 +27,8 @@ const Board = () => {
 				);
 			})}
 			{cells.map((type, index) => {
+				if (hasWinner && !type) return null;
+
 				return (
 					<Fragment key={index}>
 						<BoardUnit
