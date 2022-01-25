@@ -1,18 +1,22 @@
-import { Canvas } from "@react-three/fiber";
-import Board from "./components/Board/Board";
-import Controls from "./components/Controls";
-import Stars from "./components/Stars";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { socket, SocketContext } from "./services/socket";
+import StartScreen from "./components/StartScreen/StartScreen";
+import Host from "./components/StartScreen/Host";
+import Join from "./components/StartScreen/Join";
+import Game from "./components/Game";
 
 const App = () => {
 	return (
-		<Canvas invalidateFrameloop={true}>
-			<Controls />
-			<ambientLight />
-			<pointLight position={[10, 10, 10]} />
-
-			<Board />
-			<Stars count={1000} />
-		</Canvas>
+		<SocketContext.Provider value={socket}>
+			<BrowserRouter>
+				<Routes>
+					<Route index element={<StartScreen />} />
+					<Route path="/host" element={<Host />} />
+					<Route path="/join" element={<Join />} />
+					<Route path="game/:gameId" element={<Game />} />
+				</Routes>
+			</BrowserRouter>
+		</SocketContext.Provider>
 	);
 };
 

@@ -19,6 +19,11 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background: #080808;
 	background: radial-gradient(#0a031e, #080808);
+	color: #d0d0d0;
+}
+
+a {
+	color: #d0d0d0;
 }
 
 code {
