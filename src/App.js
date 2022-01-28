@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Router, Route } from "wouter";
 import { socket, SocketContext } from "./services/socket";
 import StartScreen from "./components/StartScreen/StartScreen";
 import Host from "./components/StartScreen/Host";
@@ -8,14 +8,12 @@ import Game from "./components/Game";
 const App = () => {
 	return (
 		<SocketContext.Provider value={socket}>
-			<BrowserRouter>
-				<Routes>
-					<Route index element={<StartScreen />} />
-					<Route path="/host" element={<Host />} />
-					<Route path="/join" element={<Join />} />
-					<Route path="game/:gameId" element={<Game />} />
-				</Routes>
-			</BrowserRouter>
+			<Router>
+				<Route path="/" component={StartScreen} />
+				<Route path="/host" component={Host} />
+				<Route path="/join" component={Join} />
+				<Game />
+			</Router>
 		</SocketContext.Provider>
 	);
 };

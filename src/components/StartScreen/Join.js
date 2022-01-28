@@ -1,14 +1,14 @@
 import { useContext, useState, useEffect } from "react";
 import { SocketContext } from "../../services/socket";
 import { StoreContext } from "../../store";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "wouter";
 
 const Join = () => {
-	const navigate = useNavigate();
+	const [, setLocation] = useLocation();
 	const socket = useContext(SocketContext);
 	const {
-		gameId: [gameId, setGameId],
-		userId: [, setUserId],
+		currentGameId: [currentGameId, setCurrentGameId],
+		myId: [myId, setMyId],
 	} = useContext(StoreContext);
 
 	const [hasJoinedGame, setHasJoinedGame] = useState(false);
@@ -37,9 +37,9 @@ const Join = () => {
 			setHasError(true);
 		};
 
-		const joinedGameListener = (gameInfo) => {
-			setGameId(gameInfo.gameId);
-			setUserId(gameInfo.userId);
+		const joinedGameListener = ({ gameId, userId }) => {
+			setCurrentGameId(gameId);
+			setMyId(userId);
 			setHasJoinedGame(true);
 		};
 
@@ -52,13 +52,13 @@ const Join = () => {
 			socket.off("hostReady", hostReadyListener);
 			socket.off("gameNotFound", gameNotFoundListener);
 		};
-	}, [socket, setGameId, setUserId]);
+	}, [socket, setCurrentGameId, setMyId, myId]);
 
 	useEffect(() => {
-		if (gameId && hostReady) {
-			navigate(`/game/${gameId}`);
+		if (currentGameId && hostReady) {
+			setLocation(`/game/${currentGameId}`);
 		}
-	}, [hostReady, gameId, navigate]);
+	}, [hostReady, currentGameId, setLocation]);
 
 	return (
 		<div>
@@ -73,7 +73,7 @@ const Join = () => {
 
 			{hasJoinedGame && !hostReady && (
 				<>
-					<h2>Joined game {gameId} succesfully</h2>
+					<h2>Joined game {currentGameId} succesfully</h2>
 					<p>waiting for host to start the game...</p>
 				</>
 			)}

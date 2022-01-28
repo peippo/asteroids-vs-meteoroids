@@ -3,12 +3,14 @@ import { createContext, useState } from "react";
 export const StoreContext = createContext(null);
 
 export const StoreProvider = ({ children }) => {
-	const [userId, setUserId] = useState();
-	const [gameId, setGameId] = useState();
+	const [myId, setMyId] = useState(null);
+	const [currentGameId, setCurrentGameId] = useState(null);
+	const [isMyTurn, setIsMyTurn] = useState(false);
 
 	const store = {
-		userId: [userId, setUserId],
-		gameId: [gameId, setGameId],
+		myId: [myId, setMyId],
+		currentGameId: [currentGameId, setCurrentGameId],
+		isMyTurn: [isMyTurn, setIsMyTurn],
 	};
 
 	return (

@@ -1,33 +1,33 @@
 import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "wouter";
 import { SocketContext } from "../../services/socket";
 import { StoreContext } from "../../store";
 
 const Host = () => {
-	const navigate = useNavigate();
+	const [, setLocation] = useLocation();
 	const socket = useContext(SocketContext);
 	const {
-		gameId: [gameId, setGameId],
-		userId: [, setUserId],
+		currentGameId: [currentGameId, setCurrentGameId],
+		myId: [myId, setMyId],
 	} = useContext(StoreContext);
 
 	const [hasPlayerJoined, setHasPlayerJoined] = useState(false);
 
 	const handleReadyClick = () => {
-		socket.emit("startGame", gameId);
-		navigate(`/game/${gameId}`);
+		socket.emit("startGame", currentGameId);
+		setLocation(`/game/${currentGameId}`);
 	};
 
 	useEffect(() => {
-		socket && socket.emit("createNewGame");
+		socket.emit("createNewGame");
 	}, [socket]);
 
 	useEffect(() => {
 		if (!socket) return;
 
-		const newGameCreatedListener = (gameInfo) => {
-			setGameId(gameInfo.gameId);
-			setUserId(gameInfo.userId);
+		const newGameCreatedListener = ({ gameId, userId }) => {
+			setCurrentGameId(gameId);
+			setMyId(userId);
 		};
 
 		const clientReadyListener = () => {
@@ -41,12 +41,12 @@ const Host = () => {
 			socket.off("newGameCreated", newGameCreatedListener);
 			socket.off("clientReady", clientReadyListener);
 		};
-	}, [socket, setGameId, setUserId]);
+	}, [socket, setCurrentGameId, setMyId, myId]);
 
 	return (
 		<div>
 			<h1>Host a game</h1>
-			{!hasPlayerJoined && <p>Game ID: {gameId}</p>}
+			{!hasPlayerJoined && <p>Game ID: {currentGameId}</p>}
 
 			{hasPlayerJoined && (
 				<>
