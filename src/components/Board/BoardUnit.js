@@ -11,22 +11,25 @@ const BoardUnit = ({ index, type, position, handleUnitClick }) => {
 		opponentId: [opponentId],
 	} = useContext(StoreContext);
 
-	switch (type) {
-		case myId:
-			return <BoardUnitX position={position} />;
-		case opponentId:
-			return <BoardUnitO position={position} />;
-		case "center":
-			return <BoardUnitCenter />;
-		default:
-			return (
-				<BoardUnitPlaceMarker
-					index={index}
-					position={position}
-					handleUnitClick={handleUnitClick}
-				/>
-			);
+	if (myId && type === myId) {
+		return <BoardUnitX position={position} />;
 	}
+
+	if (opponentId && type === opponentId) {
+		return <BoardUnitO position={position} />;
+	}
+
+	if (type === "center") {
+		return <BoardUnitCenter />;
+	}
+
+	return (
+		<BoardUnitPlaceMarker
+			index={index}
+			position={position}
+			handleUnitClick={handleUnitClick}
+		/>
+	);
 };
 
 export default BoardUnit;
