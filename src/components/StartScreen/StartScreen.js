@@ -33,6 +33,7 @@ const StartScreen = () => {
 
 	return (
 		<Modal>
+			<Logo src="/logo.png" alt="Asteroids vs. Meteoroids" />
 			<Wrapper>
 				<Fieldset>
 					<Legend>Single player</Legend>
@@ -53,14 +54,24 @@ const StartScreen = () => {
 };
 
 const Wrapper = styled.div`
+	position: relative;
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
 	gap: 1rem;
+	padding-top: 50px;
 
 	@media (min-width: 800px) {
 		flex-direction: row;
 	}
+`;
+
+const Logo = styled.img`
+	position: absolute;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: calc(100% - 50px);
 `;
 
 const Fieldset = styled.fieldset`
