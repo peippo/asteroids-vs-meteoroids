@@ -4,7 +4,7 @@ import StartScreen from "./components/StartScreen/StartScreen";
 import Host from "./components/StartScreen/Host";
 import Join from "./components/StartScreen/Join";
 import Game from "./components/Game";
-import Hud from "./components/Hud/Hud";
+import GameOverlay from "./components/GameOverlay/GameOverlay";
 
 const App = () => {
 	return (
@@ -13,7 +13,7 @@ const App = () => {
 				<Route path="/" component={StartScreen} />
 				<Route path="/host" component={Host} />
 				<Route path="/join" component={Join} />
-				<Route path="/game/:gameId" component={Hud} />
+				<Route path="/game/:gameId" component={GameOverlay} />
 				<Game />
 			</Router>
 		</SocketContext.Provider>

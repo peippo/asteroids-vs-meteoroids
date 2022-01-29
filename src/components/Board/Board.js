@@ -1,7 +1,7 @@
 import { useContext, Fragment, useState, useEffect } from "react";
 import { SocketContext } from "../../services/socket";
 import { StoreContext } from "../../store";
-import { boardPositions, checkWinner, initialCells } from "../../utils";
+import { boardPositions, initialCells } from "../../utils";
 import BoardGridCell from "./BoardGridCell";
 import BoardUnit from "./BoardUnit";
 
@@ -11,14 +11,13 @@ const Board = () => {
 		myId: [myId],
 		isMyTurn: [isMyTurn, setIsMyTurn],
 		currentGameId: [currentGameId],
+		winner: [winner, setWinner],
 	} = useContext(StoreContext);
 
 	const [cells, setCells] = useState(initialCells);
 
-	const hasWinner = checkWinner(cells);
-
 	const handleUnitClick = (index) => {
-		if (!isMyTurn) return;
+		if (!isMyTurn || winner) return;
 
 		const newCells = [...cells];
 		newCells[index] = myId;
@@ -39,12 +38,24 @@ const Board = () => {
 			setIsMyTurn(myId === data.nextTurnId);
 		};
 
+		const winnerListener = ({ winnerId }) => {
+			setWinner(winnerId);
+		};
+
+		const resetGameListener = () => {
+			setWinner(null);
+		};
+
 		socket.on("turnInfo", turnInfoListener);
+		socket.on("winnerFound", winnerListener);
+		socket.on("resetGame", resetGameListener);
 
 		return () => {
 			socket.off("turnInfo", turnInfoListener);
+			socket.off("winnerFound", winnerListener);
+			socket.off("resetGame", resetGameListener);
 		};
-	}, [socket, myId, setIsMyTurn]);
+	}, [socket, myId, setIsMyTurn, setWinner]);
 
 	return (
 		<>
@@ -56,8 +67,6 @@ const Board = () => {
 				);
 			})}
 			{cells.map((type, index) => {
-				if (hasWinner && !type) return null;
-
 				return (
 					<Fragment key={index}>
 						<BoardUnit

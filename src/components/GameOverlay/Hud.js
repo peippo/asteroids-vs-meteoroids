@@ -6,15 +6,18 @@ import { ReactComponent as ArrowIcon } from "../../icons/caret-right-solid.svg";
 const Hud = () => {
 	const {
 		isMyTurn: [isMyTurn],
+		winner: [winner],
 	} = useContext(StoreContext);
 
 	return (
 		<StyledHud>
-			<PlayerTab isActive={isMyTurn} position="left">
+			<PlayerTab isActive={isMyTurn && !winner} position="left">
 				<span>You</span>
 			</PlayerTab>
-			<StyledArrowIcon direction={isMyTurn ? "left" : "right"} />
-			<PlayerTab isActive={!isMyTurn} position="right">
+			{!winner && (
+				<StyledArrowIcon direction={isMyTurn ? "left" : "right"} />
+			)}
+			<PlayerTab isActive={!isMyTurn && !winner} position="right">
 				<span>Opponent</span>
 			</PlayerTab>
 		</StyledHud>
@@ -42,7 +45,9 @@ const PlayerTab = styled.div`
 			? "linear-gradient(to top, rgb(0 100 0 / 40%), rgb(0 100 0 / 0%) 80%)"
 			: "transparent"};
 	border-bottom: ${({ isActive }) =>
-		isActive ? "3px solid var(--color-green)" : "3px solid transparent"};
+		isActive
+			? "3px solid var(--color-light-green)"
+			: "3px solid transparent"};
 	padding: 0 1.25rem;
 	min-width: 150px;
 	height: 50px;
@@ -56,8 +61,8 @@ const PlayerTab = styled.div`
 	box-shadow: 0 0 50px rgb(8 181 8 / 15%);
 
 	span {
-		font-weight: 700;
-		text-shadow: 0 2px 2px rgb(0 0 0 / 50%);
+		font-weight: var(--heading-font-weight);
+		text-shadow: var(--hud-text-shadow);
 		pointer-events: none;
 	}
 
