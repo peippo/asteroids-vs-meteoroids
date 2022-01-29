@@ -54,6 +54,7 @@ const Board = () => {
 		const resetGameListener = () => {
 			setOpponentLeft(null);
 			setWinner(null);
+			setCells(initialCells);
 		};
 
 		const opponentLeftListener = () => {
@@ -71,7 +72,7 @@ const Board = () => {
 			socket.off("resetGame", resetGameListener);
 			socket.off("opponentLeft", opponentLeftListener);
 		};
-	}, [socket, myId, setIsMyTurn, setWinner]);
+	}, [socket, myId, setIsMyTurn, setWinner, setOpponentLeft]);
 
 	return (
 		<>
