@@ -1,3 +1,10 @@
+:root {
+	--hud-background: rgb(37 46 72 / 60%)
+		linear-gradient(to top, rgb(31 75 118 / 40%), rgb(31 75 118 / 0%) 50%);
+	--hub-box-shadow: inset 0 0 20px rgb(171 210 249 / 20%);
+	--color-green: rgb(8 181 8);
+}
+
 *,
 *::before,
 *::after {
@@ -12,14 +19,13 @@ main {
 
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-		"Helvetica Neue", sans-serif;
+	font-family: "Chakra Petch", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background: #080808;
 	background: radial-gradient(#0a031e, #080808);
 	color: #d0d0d0;
+	font-weight: 500;
 }
 
 a {
