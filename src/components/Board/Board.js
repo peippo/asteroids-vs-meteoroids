@@ -4,14 +4,17 @@ import { StoreContext } from "../../store";
 import { boardPositions, initialCells } from "../../utils";
 import BoardGridCell from "./BoardGridCell";
 import BoardUnit from "./BoardUnit";
+import { useLocation } from "wouter";
 
 const Board = () => {
+	const [, setLocation] = useLocation();
 	const socket = useContext(SocketContext);
 	const {
 		myId: [myId],
 		isMyTurn: [isMyTurn, setIsMyTurn],
 		currentGameId: [currentGameId],
 		winner: [winner, setWinner],
+		opponentLeft: [, setOpponentLeft],
 	} = useContext(StoreContext);
 
 	const [cells, setCells] = useState(initialCells);
@@ -31,6 +34,12 @@ const Board = () => {
 	};
 
 	useEffect(() => {
+		if (!currentGameId) {
+			setLocation(`/`);
+		}
+	}, [currentGameId, setLocation]);
+
+	useEffect(() => {
 		if (!socket) return;
 
 		const turnInfoListener = (data) => {
@@ -43,17 +52,24 @@ const Board = () => {
 		};
 
 		const resetGameListener = () => {
+			setOpponentLeft(null);
 			setWinner(null);
+		};
+
+		const opponentLeftListener = () => {
+			setOpponentLeft(true);
 		};
 
 		socket.on("turnInfo", turnInfoListener);
 		socket.on("winnerFound", winnerListener);
 		socket.on("resetGame", resetGameListener);
+		socket.on("opponentLeft", opponentLeftListener);
 
 		return () => {
 			socket.off("turnInfo", turnInfoListener);
 			socket.off("winnerFound", winnerListener);
 			socket.off("resetGame", resetGameListener);
+			socket.off("opponentLeft", opponentLeftListener);
 		};
 	}, [socket, myId, setIsMyTurn, setWinner]);
 

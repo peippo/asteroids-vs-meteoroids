@@ -18,9 +18,14 @@ const GameEndScreen = () => {
 
 	return (
 		<Container>
-			<Heading>You {winner === myId ? "won!" : "lost!"}</Heading>
+			<h1 className="styled-heading">
+				You {winner === myId ? "won!" : "lost!"}
+			</h1>
 			{isHost ? (
-				<button onClick={handleReadyClick}>Start a new game</button>
+				<>
+					<Text>Play another round?</Text>
+					<Button onClick={handleReadyClick}>Start a new game</Button>
+				</>
 			) : (
 				<Text>Waiting for host to start a new game...</Text>
 			)}
@@ -41,16 +46,13 @@ const Container = styled.div`
 	text-align: center;
 `;
 
-const Heading = styled.h2`
-	text-transform: uppercase;
-	font-size: 2rem;
-	margin: 0 0 1rem 0;
-	text-shadow: var(--hud-text-shadow);
-`;
-
 const Text = styled.p`
 	margin: 0;
 	text-shadow: var(--hud-text-shadow);
+`;
+
+const Button = styled.button`
+	margin-top: 2rem;
 `;
 
 export default GameEndScreen;

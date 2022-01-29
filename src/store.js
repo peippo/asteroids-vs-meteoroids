@@ -9,6 +9,7 @@ export const StoreProvider = ({ children }) => {
 	const [isHost, setIsHost] = useState(false);
 	const [isMyTurn, setIsMyTurn] = useState(false);
 	const [winner, setWinner] = useState(null);
+	const [opponentLeft, setOpponentLeft] = useState(false);
 
 	const store = {
 		myId: [myId, setMyId],
@@ -17,6 +18,7 @@ export const StoreProvider = ({ children }) => {
 		isHost: [isHost, setIsHost],
 		isMyTurn: [isMyTurn, setIsMyTurn],
 		winner: [winner, setWinner],
+		opponentLeft: [opponentLeft, setOpponentLeft],
 	};
 
 	return (
