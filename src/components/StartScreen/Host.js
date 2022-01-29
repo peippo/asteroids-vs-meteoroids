@@ -9,6 +9,7 @@ const Host = () => {
 	const {
 		currentGameId: [currentGameId, setCurrentGameId],
 		myId: [myId, setMyId],
+		opponentId: [, setOpponentId],
 	} = useContext(StoreContext);
 
 	const [hasPlayerJoined, setHasPlayerJoined] = useState(false);
@@ -30,8 +31,9 @@ const Host = () => {
 			setMyId(userId);
 		};
 
-		const clientReadyListener = () => {
+		const clientReadyListener = ({ clientId }) => {
 			setHasPlayerJoined(true);
+			setOpponentId(clientId);
 		};
 
 		socket.on("newGameCreated", newGameCreatedListener);
@@ -41,7 +43,7 @@ const Host = () => {
 			socket.off("newGameCreated", newGameCreatedListener);
 			socket.off("clientReady", clientReadyListener);
 		};
-	}, [socket, setCurrentGameId, setMyId, myId]);
+	}, [socket, setCurrentGameId, setMyId, myId, setOpponentId]);
 
 	return (
 		<div>

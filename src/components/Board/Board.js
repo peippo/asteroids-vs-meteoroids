@@ -14,7 +14,6 @@ const Board = () => {
 	} = useContext(StoreContext);
 
 	const [cells, setCells] = useState(initialCells);
-	const [next, setNext] = useState("X");
 
 	const hasWinner = checkWinner(cells);
 
@@ -22,9 +21,7 @@ const Board = () => {
 		if (!isMyTurn) return;
 
 		const newCells = [...cells];
-		newCells[index] = next;
-
-		setNext(next === "X" ? "O" : "X");
+		newCells[index] = myId;
 		setCells(newCells);
 
 		socket.emit("sendTurn", {

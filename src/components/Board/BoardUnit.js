@@ -1,13 +1,20 @@
+import { useContext } from "react";
+import { StoreContext } from "../../store";
 import BoardUnitPlaceMarker from "./BoardUnitPlaceMarker";
 import BoardUnitCenter from "./BoardUnitCenter";
 import BoardUnitX from "./BoardUnitX";
 import BoardUnitO from "./BoardUnitO";
 
 const BoardUnit = ({ index, type, position, handleUnitClick }) => {
+	const {
+		myId: [myId],
+		opponentId: [opponentId],
+	} = useContext(StoreContext);
+
 	switch (type) {
-		case "X":
+		case myId:
 			return <BoardUnitX position={position} />;
-		case "O":
+		case opponentId:
 			return <BoardUnitO position={position} />;
 		case "center":
 			return <BoardUnitCenter />;

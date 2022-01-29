@@ -9,6 +9,7 @@ const Join = () => {
 	const {
 		currentGameId: [currentGameId, setCurrentGameId],
 		myId: [myId, setMyId],
+		opponentId: [, setOpponentId],
 	} = useContext(StoreContext);
 
 	const [hasJoinedGame, setHasJoinedGame] = useState(false);
@@ -37,9 +38,10 @@ const Join = () => {
 			setHasError(true);
 		};
 
-		const joinedGameListener = ({ gameId, userId }) => {
+		const joinedGameListener = ({ gameId, userId, hostId }) => {
 			setCurrentGameId(gameId);
 			setMyId(userId);
+			setOpponentId(hostId);
 			setHasJoinedGame(true);
 		};
 
@@ -52,7 +54,7 @@ const Join = () => {
 			socket.off("hostReady", hostReadyListener);
 			socket.off("gameNotFound", gameNotFoundListener);
 		};
-	}, [socket, setCurrentGameId, setMyId, myId]);
+	}, [socket, setCurrentGameId, setMyId, myId, setOpponentId]);
 
 	useEffect(() => {
 		if (currentGameId && hostReady) {
