@@ -1,7 +1,9 @@
+import styled from "styled-components";
 import { useContext, useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { SocketContext } from "../../services/socket";
 import { StoreContext } from "../../store";
+import Modal from "../Modal";
 
 const Host = () => {
 	const [, setLocation] = useLocation();
@@ -48,19 +50,41 @@ const Host = () => {
 	}, [socket, setCurrentGameId, setMyId, myId, setOpponentId, setIsHost]);
 
 	return (
-		<div>
-			<h1>Host a game</h1>
-			{!hasPlayerJoined && <p>Game ID: {currentGameId}</p>}
+		<Modal>
+			<h1 className="styled-heading">Host a game</h1>
+			{!hasPlayerJoined && (
+				<>
+					<Text>
+						Ask a friend to join you with <strong>Game ID:</strong>
+					</Text>
+					<GameId>{currentGameId}</GameId>
+				</>
+			)}
 
 			{hasPlayerJoined && (
 				<>
-					<p>Someone joined!</p>
-					<p>Ready?</p>
-					<button onClick={handleReadyClick}>Let's go</button>
+					<Text>
+						<strong>Someone joined!</strong> Ready?
+					</Text>
+					<Button onClick={handleReadyClick}>Start the game</Button>
 				</>
 			)}
-		</div>
+		</Modal>
 	);
 };
+
+const Text = styled.p`
+	margin-bottom: 0;
+`;
+
+const GameId = styled.span`
+	display: block;
+	font-size: 2.5rem;
+	color: var(--color-light-green);
+`;
+
+const Button = styled.button`
+	margin-top: 2rem;
+`;
 
 export default Host;
