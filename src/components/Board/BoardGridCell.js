@@ -6,7 +6,7 @@ const BoardGridCell = ({ position }) => {
 	return (
 		<lineSegments position={position}>
 			<edgesGeometry attach="geometry" args={[geometry]} />
-			<lineBasicMaterial attach="material" color={"gray"} />
+			<lineBasicMaterial attach="material" color={"#5a5a5a"} />
 		</lineSegments>
 	);
 };
