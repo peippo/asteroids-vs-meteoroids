@@ -3,7 +3,7 @@
 	--heading-font-weight: 700;
 	--hud-background: rgb(37 46 72 / 80%)
 		linear-gradient(to top, rgb(31 75 118 / 40%), rgb(31 75 118 / 0%) 50%);
-	--hud-box-shadow: inset 0 0 20px rgb(171 210 249 / 20%);
+	--hud-box-shadow: inset 0 0 20px rgb(171 210 249 / 30%);
 	--hud-text-shadow: 0 2px 2px rgb(0 0 0 / 50%);
 	--color-green: rgb(4 151 4);
 	--color-light-green: rgb(8 181 8);
@@ -98,6 +98,7 @@ button {
 	white-space: nowrap;
 	text-decoration: none;
 	text-align: center;
+	box-shadow: 0 4px 8px rgb(20 20 20 / 60%);
 }
 
 .button:after,
@@ -128,6 +129,7 @@ button:disabled {
 	background: var(--hud-background);
 	text-shadow: none;
 	color: rgb(255, 255, 255, 0.25);
+	box-shadow: none;
 }
 
 button:disabled:after {
