@@ -1,10 +1,12 @@
 import { useRef, useMemo } from "react";
+import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 
 useGLTF.preload("/asteroid-blue.gltf");
 
 const BoardUnitX = ({ position }) => {
 	const group = useRef();
+	const mesh = useRef();
 	const { nodes, materials } = useGLTF("/asteroid-blue.gltf");
 
 	const randomizeRotation = () => {
@@ -16,6 +18,14 @@ const BoardUnitX = ({ position }) => {
 	};
 
 	const rotation = useMemo(() => randomizeRotation(), []);
+
+	useFrame(
+		() =>
+			(mesh.current.rotation.x =
+				mesh.current.rotation.y =
+				mesh.current.rotation.z +=
+					0.002)
+	);
 
 	return (
 		<group
@@ -29,6 +39,7 @@ const BoardUnitX = ({ position }) => {
 			scale={[0.45, 0.45, 0.45]}
 		>
 			<mesh
+				ref={mesh}
 				castShadow
 				receiveShadow
 				geometry={nodes.Cube.geometry}
