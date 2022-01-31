@@ -1,31 +1,23 @@
 import styled from "styled-components";
-import { useContext, useState, useEffect } from "react";
-import { SocketContext } from "../../services/socket";
-import { StoreContext } from "../../store";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
+import useJoin from "../../hooks/useJoin";
 import Modal from "../Modal";
 import { ReactComponent as SuccessIcon } from "../../icons/check-circle-solid.svg";
 import { ReactComponent as ErrorIcon } from "../../icons/times-circle-solid.svg";
-import {
-	GAME_NOT_FOUND,
-	HOST_READY,
-	JOINED_GAME,
-	JOIN_GAME,
-} from "../../constants";
 import BackButton from "./BackButton";
 
 const Join = () => {
+	const [
+		currentGameId,
+		joinGame,
+		hasJoinedGame,
+		hostReady,
+		hasError,
+		setHasError,
+	] = useJoin();
 	const [, setLocation] = useLocation();
-	const socket = useContext(SocketContext);
-	const {
-		currentGameId: [currentGameId, setCurrentGameId],
-		myId: [myId, setMyId],
-		opponentId: [, setOpponentId],
-	} = useContext(StoreContext);
 
-	const [hasJoinedGame, setHasJoinedGame] = useState(false);
-	const [hasError, setHasError] = useState(false);
-	const [hostReady, setHostReady] = useState(false);
 	const [inputValue, setInputValue] = useState("");
 
 	const handleChange = (event) => {
@@ -35,37 +27,8 @@ const Join = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		socket.emit(JOIN_GAME, inputValue.toString());
+		joinGame(inputValue.toString());
 	};
-
-	useEffect(() => {
-		if (!socket) return;
-
-		const hostReadyListener = () => {
-			setHostReady(true);
-		};
-
-		const gameNotFoundListener = () => {
-			setHasError(true);
-		};
-
-		const joinedGameListener = ({ gameId, userId, hostId }) => {
-			setCurrentGameId(gameId);
-			setMyId(userId);
-			setOpponentId(hostId);
-			setHasJoinedGame(true);
-		};
-
-		socket.on(JOINED_GAME, joinedGameListener);
-		socket.on(HOST_READY, hostReadyListener);
-		socket.on(GAME_NOT_FOUND, gameNotFoundListener);
-
-		return () => {
-			socket.off(JOINED_GAME, joinedGameListener);
-			socket.off(HOST_READY, hostReadyListener);
-			socket.off(GAME_NOT_FOUND, gameNotFoundListener);
-		};
-	}, [socket, setCurrentGameId, setMyId, myId, setOpponentId]);
 
 	useEffect(() => {
 		if (currentGameId && hostReady) {

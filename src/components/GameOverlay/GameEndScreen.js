@@ -1,31 +1,16 @@
-import { useContext } from "react";
-import { SocketContext } from "../../services/socket";
-import { StoreContext } from "../../store";
 import styled from "styled-components";
-import { START_GAME } from "../../constants";
+import useGameEnd from "../../hooks/useGameEnd";
 
 const GameEndScreen = () => {
-	const socket = useContext(SocketContext);
-	const {
-		currentGameId: [currentGameId],
-		myId: [myId],
-		winner: [winner],
-		isHost: [isHost],
-	} = useContext(StoreContext);
-
-	const handleReadyClick = () => {
-		socket.emit(START_GAME, currentGameId);
-	};
+	const [isWinner, isHost, handleRestartClick] = useGameEnd();
 
 	return (
 		<Container>
-			<h1 className="styled-heading">
-				You {winner === myId ? "won!" : "lost!"}
-			</h1>
+			<h1 className="styled-heading">You {isWinner ? "won!" : "lost!"}</h1>
 			{isHost ? (
 				<>
 					<Text>Play another round?</Text>
-					<Button onClick={handleReadyClick}>Start a new game</Button>
+					<Button onClick={handleRestartClick}>Start a new game</Button>
 				</>
 			) : (
 				<Text>Waiting for host to start a new game...</Text>
