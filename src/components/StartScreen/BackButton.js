@@ -14,8 +14,8 @@ const BackButton = () => {
 const StyledLink = styled(Link)`
 	position: absolute;
 	top: -8px;
-	left: -2px;
-	border-radius: 1000px;
+	left: -4px;
+	border-radius: 18px 5px 10px 5px;
 	padding: 0;
 	width: 50px;
 	height: 50px;
@@ -24,7 +24,7 @@ const StyledLink = styled(Link)`
 	align-items: center;
 
 	&:after {
-		border-radius: 1000px;
+		border-radius: 18px 5px 10px 5px;
 	}
 `;
 

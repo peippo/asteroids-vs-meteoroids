@@ -80,7 +80,7 @@ const Fieldset = styled.fieldset`
 	flex-direction: column;
 	gap: 1rem;
 	width: 100%;
-	border-radius: 8px;
+	border-radius: 8px 8px 25px 8px;
 	border-color: rgb(208 208 208 / 60%);
 	padding: 1rem 1.5rem;
 

@@ -106,7 +106,7 @@ button {
 	text-transform: uppercase;
 	font-family: var(--font-family);
 	text-shadow: var(--hud-text-shadow);
-	border-radius: 6px;
+	border-radius: 18px 6px 18px 6px;
 	transition: all 0.25s;
 	white-space: nowrap;
 	text-decoration: none;
@@ -123,7 +123,7 @@ button:after {
 	width: calc(100% - 8px);
 	height: calc(100% - 8px);
 	border: 2px solid var(--color-green);
-	border-radius: 3px;
+	border-radius: 14px 3px 14px 3px;
 	transition: border 0.25s;
 }
 
