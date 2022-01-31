@@ -11,6 +11,7 @@ const Hud = () => {
 
 	return (
 		<StyledHud>
+			<Orb isYou={true} isActive={isMyTurn && !winner} />
 			<PlayerTab isActive={isMyTurn && !winner} position="left">
 				<span>You</span>
 			</PlayerTab>
@@ -20,6 +21,7 @@ const Hud = () => {
 			<PlayerTab isActive={!isMyTurn && !winner} position="right">
 				<span>Opponent</span>
 			</PlayerTab>
+			<Orb isActive={!isMyTurn && !winner} />
 		</StyledHud>
 	);
 };
@@ -34,6 +36,61 @@ const StyledHud = styled.header`
 	background: var(--hud-background);
 	box-shadow: var(--hud-box-shadow);
 	border-radius: 5px;
+`;
+
+const Orb = styled.div`
+	position: absolute;
+	right: -10px;
+	top: 50%;
+	width: 20px;
+	height: 20px;
+	transform: translateY(-50%);
+	background: radial-gradient(#588bdf, #6522e3);
+	border-radius: 1000px;
+	border: 3px solid #080808;
+	transition: all 0.25s;
+
+	&:after {
+		content: "";
+		position: absolute;
+		top: 3px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 8px;
+		height: 8px;
+		border-radius: 100px;
+		background-color: #fff;
+		background: radial-gradient(#fff, rgb(255 255 255 / 0%));
+		opacity: 0;
+		transition: opacity 0.25s;
+	}
+
+	${({ isYou }) =>
+		isYou &&
+		css`
+			left: -10px;
+			right: auto;
+			background: radial-gradient(#e8c062, #ef352e);
+		`}
+
+	${({ isActive }) =>
+		isActive &&
+		css`
+			right: -14px;
+			width: 28px;
+			height: 28px;
+
+			&:after {
+				opacity: 0.75;
+			}
+		`}
+
+		${({ isYou, isActive }) =>
+		isYou &&
+		isActive &&
+		css`
+			left: -14px;
+		`}
 `;
 
 const PlayerTab = styled.div`
