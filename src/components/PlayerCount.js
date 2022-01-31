@@ -50,6 +50,7 @@ const Wrapper = styled.div`
 
 const StyledPlayerIcon = styled(PlayerIcon)`
 	width: 32px;
+	height: 40px;
 `;
 
 const Tooltip = styled.span`
