@@ -12,6 +12,7 @@ import {
 	JOINED_GAME,
 	JOIN_GAME,
 } from "../../constants";
+import BackButton from "./BackButton";
 
 const Join = () => {
 	const [, setLocation] = useLocation();
@@ -122,6 +123,8 @@ const Join = () => {
 					</ErrorText>
 				</>
 			)}
+
+			<BackButton />
 		</Modal>
 	);
 };

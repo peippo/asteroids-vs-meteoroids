@@ -10,6 +10,7 @@ import {
 	NEW_GAME_CREATED,
 	START_GAME,
 } from "../../constants";
+import BackButton from "./BackButton";
 
 const Host = () => {
 	const [, setLocation] = useLocation();
@@ -75,6 +76,8 @@ const Host = () => {
 					<Button onClick={handleReadyClick}>Start the game</Button>
 				</>
 			)}
+
+			<BackButton />
 		</Modal>
 	);
 };
