@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { SocketContext } from "../services/socket";
 import { ReactComponent as PlayerIcon } from "../icons/user-robot-solid.svg";
+import { PLAYERS_ONLINE_COUNT } from "../constants";
 
 const PlayerCount = () => {
 	const socket = useContext(SocketContext);
@@ -14,10 +15,10 @@ const PlayerCount = () => {
 			setPlayerCount(playerCount);
 		};
 
-		socket.on("playersOnline", playersOnlineListener);
+		socket.on(PLAYERS_ONLINE_COUNT, playersOnlineListener);
 
 		return () => {
-			socket.off("playersOnline", playersOnlineListener);
+			socket.off(PLAYERS_ONLINE_COUNT, playersOnlineListener);
 		};
 	}, [socket, setPlayerCount]);
 

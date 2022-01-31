@@ -4,6 +4,12 @@ import { useLocation } from "wouter";
 import { SocketContext } from "../../services/socket";
 import { StoreContext } from "../../store";
 import Modal from "../Modal";
+import {
+	CLIENT_READY,
+	CREATE_NEW_GAME,
+	NEW_GAME_CREATED,
+	START_GAME,
+} from "../../constants";
 
 const Host = () => {
 	const [, setLocation] = useLocation();
@@ -18,12 +24,12 @@ const Host = () => {
 	const [hasPlayerJoined, setHasPlayerJoined] = useState(false);
 
 	const handleReadyClick = () => {
-		socket.emit("startGame", currentGameId);
+		socket.emit(START_GAME, currentGameId);
 		setLocation(`/game/${currentGameId}`);
 	};
 
 	useEffect(() => {
-		socket.emit("createNewGame");
+		socket.emit(CREATE_NEW_GAME);
 	}, [socket]);
 
 	useEffect(() => {
@@ -40,12 +46,12 @@ const Host = () => {
 			setOpponentId(clientId);
 		};
 
-		socket.on("newGameCreated", newGameCreatedListener);
-		socket.on("clientReady", clientReadyListener);
+		socket.on(NEW_GAME_CREATED, newGameCreatedListener);
+		socket.on(CLIENT_READY, clientReadyListener);
 
 		return () => {
-			socket.off("newGameCreated", newGameCreatedListener);
-			socket.off("clientReady", clientReadyListener);
+			socket.off(NEW_GAME_CREATED, newGameCreatedListener);
+			socket.off(CLIENT_READY, clientReadyListener);
 		};
 	}, [socket, setCurrentGameId, setMyId, myId, setOpponentId, setIsHost]);
 

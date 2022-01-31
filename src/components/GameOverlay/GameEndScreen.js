@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { SocketContext } from "../../services/socket";
 import { StoreContext } from "../../store";
 import styled from "styled-components";
+import { START_GAME } from "../../constants";
 
 const GameEndScreen = () => {
 	const socket = useContext(SocketContext);
@@ -13,7 +14,7 @@ const GameEndScreen = () => {
 	} = useContext(StoreContext);
 
 	const handleReadyClick = () => {
-		socket.emit("startGame", currentGameId);
+		socket.emit(START_GAME, currentGameId);
 	};
 
 	return (

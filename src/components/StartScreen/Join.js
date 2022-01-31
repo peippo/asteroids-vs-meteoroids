@@ -6,6 +6,12 @@ import { useLocation } from "wouter";
 import Modal from "../Modal";
 import { ReactComponent as SuccessIcon } from "../../icons/check-circle-solid.svg";
 import { ReactComponent as ErrorIcon } from "../../icons/times-circle-solid.svg";
+import {
+	GAME_NOT_FOUND,
+	HOST_READY,
+	JOINED_GAME,
+	JOIN_GAME,
+} from "../../constants";
 
 const Join = () => {
 	const [, setLocation] = useLocation();
@@ -28,7 +34,7 @@ const Join = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		socket.emit("joinGame", inputValue.toString());
+		socket.emit(JOIN_GAME, inputValue.toString());
 	};
 
 	useEffect(() => {
@@ -49,14 +55,14 @@ const Join = () => {
 			setHasJoinedGame(true);
 		};
 
-		socket.on("joinedGame", joinedGameListener);
-		socket.on("hostReady", hostReadyListener);
-		socket.on("gameNotFound", gameNotFoundListener);
+		socket.on(JOINED_GAME, joinedGameListener);
+		socket.on(HOST_READY, hostReadyListener);
+		socket.on(GAME_NOT_FOUND, gameNotFoundListener);
 
 		return () => {
-			socket.off("joinedGame", joinedGameListener);
-			socket.off("hostReady", hostReadyListener);
-			socket.off("gameNotFound", gameNotFoundListener);
+			socket.off(JOINED_GAME, joinedGameListener);
+			socket.off(HOST_READY, hostReadyListener);
+			socket.off(GAME_NOT_FOUND, gameNotFoundListener);
 		};
 	}, [socket, setCurrentGameId, setMyId, myId, setOpponentId]);
 

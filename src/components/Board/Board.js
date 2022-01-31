@@ -5,6 +5,13 @@ import { boardPositions, initialCells } from "../../utils";
 import BoardGridCell from "./BoardGridCell";
 import BoardUnit from "./BoardUnit";
 import { useLocation } from "wouter";
+import {
+	OPPONENT_LEFT,
+	RESET_GAME,
+	SUBMIT_TURN,
+	TURN_INFO,
+	WINNER_FOUND,
+} from "../../constants";
 
 const Board = () => {
 	const [, setLocation] = useLocation();
@@ -26,7 +33,7 @@ const Board = () => {
 		newCells[index] = myId;
 		setCells(newCells);
 
-		socket.emit("sendTurn", {
+		socket.emit(SUBMIT_TURN, {
 			gameId: currentGameId,
 			userId: myId,
 			cells: newCells,
@@ -61,16 +68,16 @@ const Board = () => {
 			setOpponentLeft(true);
 		};
 
-		socket.on("turnInfo", turnInfoListener);
-		socket.on("winnerFound", winnerListener);
-		socket.on("resetGame", resetGameListener);
-		socket.on("opponentLeft", opponentLeftListener);
+		socket.on(TURN_INFO, turnInfoListener);
+		socket.on(WINNER_FOUND, winnerListener);
+		socket.on(RESET_GAME, resetGameListener);
+		socket.on(OPPONENT_LEFT, opponentLeftListener);
 
 		return () => {
-			socket.off("turnInfo", turnInfoListener);
-			socket.off("winnerFound", winnerListener);
-			socket.off("resetGame", resetGameListener);
-			socket.off("opponentLeft", opponentLeftListener);
+			socket.off(TURN_INFO, turnInfoListener);
+			socket.off(WINNER_FOUND, winnerListener);
+			socket.off(RESET_GAME, resetGameListener);
+			socket.off(OPPONENT_LEFT, opponentLeftListener);
 		};
 	}, [socket, myId, setIsMyTurn, setWinner, setOpponentLeft]);
 

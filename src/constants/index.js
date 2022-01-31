@@ -1,0 +1,14 @@
+export const PLAYERS_ONLINE_COUNT = "PLAYERS_ONLINE_COUNT";
+export const CREATE_NEW_GAME = "CREATE_NEW_GAME";
+export const NEW_GAME_CREATED = "NEW_GAME_CREATED";
+export const JOIN_GAME = "JOIN_GAME";
+export const GAME_NOT_FOUND = "GAME_NOT_FOUND";
+export const CLIENT_READY = "CLIENT_READY";
+export const JOINED_GAME = "JOINED_GAME";
+export const START_GAME = "START_GAME";
+export const HOST_READY = "HOST_READY";
+export const RESET_GAME = "RESET_GAME";
+export const TURN_INFO = "TURN_INFO";
+export const SUBMIT_TURN = "SUBMIT_TURN";
+export const WINNER_FOUND = "WINNER_FOUND";
+export const OPPONENT_LEFT = "OPPONENT_LEFT";
