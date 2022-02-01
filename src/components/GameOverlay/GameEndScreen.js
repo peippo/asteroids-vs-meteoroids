@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import useGameEnd from "../../hooks/useGameEnd";
+import Modal from "../Modal";
 
 const GameEndScreen = () => {
 	const [isWinner, isHost, handleRestartClick] = useGameEnd();
 
 	return (
-		<Container>
+		<Modal>
 			<h1 className="styled-heading">You {isWinner ? "won!" : "lost!"}</h1>
 			{isHost ? (
 				<>
@@ -15,22 +16,9 @@ const GameEndScreen = () => {
 			) : (
 				<Text>Waiting for host to start a new game...</Text>
 			)}
-		</Container>
+		</Modal>
 	);
 };
-
-const Container = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
-	z-index: 1000;
-	background: var(--hud-background);
-	box-shadow: var(--hud-box-shadow);
-	border-radius: 5px;
-	padding: 2rem 3rem;
-	text-align: center;
-`;
 
 const Text = styled.p`
 	margin: 0;
