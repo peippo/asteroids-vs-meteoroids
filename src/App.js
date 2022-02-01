@@ -6,6 +6,7 @@ import Join from "./components/StartScreen/Join";
 import Game from "./components/Game";
 import GameOverlay from "./components/GameOverlay/GameOverlay";
 import PlayerCount from "./components/PlayerCount";
+import Chat from "./components/Chat";
 
 const App = () => {
 	return (
@@ -16,6 +17,7 @@ const App = () => {
 				<Route path="/join" component={Join} />
 				<Route path="/game/:gameId" component={GameOverlay} />
 				<PlayerCount />
+				<Chat />
 				<Game />
 			</Router>
 		</SocketContext.Provider>
