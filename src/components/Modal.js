@@ -5,7 +5,7 @@ const Modal = ({ children }) => {
 };
 
 const Container = styled.div`
-	min-width: 400px;
+	min-width: calc(100% - 20px);
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -16,6 +16,10 @@ const Container = styled.div`
 	border-radius: 10px;
 	padding: 2rem 3rem;
 	text-align: center;
+
+	@media (min-width: 800px) {
+		min-width: 400px;
+	}
 
 	&:before,
 	&:after {

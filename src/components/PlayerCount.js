@@ -17,15 +17,10 @@ const PlayerCount = () => {
 
 const Wrapper = styled.div`
 	position: absolute;
-	top: 10px;
+	bottom: 10px;
+	left: 10px;
 	display: flex;
 	z-index: 1;
-
-	@media (min-width: 800px) {
-		bottom: 10px;
-		left: 10px;
-		top: auto;
-	}
 
 	&:hover span {
 		transition-delay: 0.25s;

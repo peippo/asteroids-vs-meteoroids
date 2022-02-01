@@ -59,7 +59,6 @@ const Wrapper = styled.div`
 	bottom: 10px;
 	right: 10px;
 	z-index: 15;
-	max-width: calc(100% - 32px);
 
 	&:focus-within {
 		ul {
@@ -86,7 +85,7 @@ const Id = styled.span`
 
 const Form = styled.form`
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
 	gap: 1rem;
 `;
@@ -108,7 +107,7 @@ const StyledSubmitIcon = styled(SubmitIcon)`
 
 const Input = styled.input`
 	border-bottom: 1px solid var(--color-light-green);
-	width: 300px;
+	width: 150px;
 	text-align: right;
 	background: transparent;
 
@@ -116,7 +115,8 @@ const Input = styled.input`
 		background: rgb(0 0 0 / 75%);
 	}
 
-	@media (min-width: 800px) {
+	@media (min-width: 600px) {
+		width: 300px;
 		background: transparent !important;
 	}
 `;
