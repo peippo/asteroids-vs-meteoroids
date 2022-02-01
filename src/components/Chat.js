@@ -60,6 +60,10 @@ const Wrapper = styled.div`
 	right: 10px;
 	z-index: 15;
 
+	@media (max-width: 600px) {
+		pointer-events: none;
+	}
+
 	&:focus-within {
 		ul {
 			opacity: 1 !important;
@@ -110,6 +114,7 @@ const Input = styled.input`
 	width: 150px;
 	text-align: right;
 	background: transparent;
+	pointer-events: auto;
 
 	&:focus {
 		background: rgb(0 0 0 / 75%);
@@ -129,6 +134,7 @@ const Button = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	pointer-events: auto;
 
 	&:after {
 		border-radius: 18px 5px 10px 5px;
