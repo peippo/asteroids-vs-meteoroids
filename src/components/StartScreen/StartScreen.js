@@ -1,36 +1,8 @@
-import { useContext, useEffect } from "react";
-import { StoreContext } from "../../store";
 import styled from "styled-components";
 import { Link } from "wouter";
 import Modal from "../Modal";
 
 const StartScreen = () => {
-	const {
-		myId: [, setMyId],
-		opponentId: [, setOpponentId],
-		isHost: [, setIsHost],
-		currentGameId: [, setCurrentGameId],
-		winner: [, setWinner],
-		opponentLeft: [, setOpponentLeft],
-	} = useContext(StoreContext);
-
-	// Reset game parameters
-	useEffect(() => {
-		setMyId(null);
-		setOpponentId(null);
-		setCurrentGameId(null);
-		setIsHost(false);
-		setWinner(null);
-		setOpponentLeft(false);
-	}, [
-		setMyId,
-		setOpponentId,
-		setCurrentGameId,
-		setIsHost,
-		setWinner,
-		setOpponentLeft,
-	]);
-
 	return (
 		<Modal>
 			<Logo src="/logo.png" alt="Asteroids vs. Meteoroids" />

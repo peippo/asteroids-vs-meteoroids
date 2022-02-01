@@ -13,6 +13,7 @@ const useJoin = () => {
 	const {
 		currentGameId: [currentGameId, setCurrentGameId],
 		myId: [myId, setMyId],
+		isHost: [, setIsHost],
 		opponentId: [, setOpponentId],
 	} = useContext(StoreContext);
 
@@ -39,6 +40,7 @@ const useJoin = () => {
 			setCurrentGameId(gameId);
 			setMyId(userId);
 			setOpponentId(hostId);
+			setIsHost(false);
 			setHasJoinedGame(true);
 		};
 
@@ -51,7 +53,7 @@ const useJoin = () => {
 			socket.off(HOST_READY, hostReadyListener);
 			socket.off(GAME_NOT_FOUND, gameNotFoundListener);
 		};
-	}, [socket, setCurrentGameId, setMyId, myId, setOpponentId]);
+	}, [socket, setCurrentGameId, setMyId, myId, setOpponentId, setIsHost]);
 
 	return [
 		currentGameId,

@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { initialCells } from "./utils";
 
 export const StoreContext = createContext(null);
 
@@ -10,6 +11,24 @@ export const StoreProvider = ({ children }) => {
 	const [isMyTurn, setIsMyTurn] = useState(false);
 	const [winner, setWinner] = useState(null);
 	const [opponentLeft, setOpponentLeft] = useState(false);
+	const [cells, setCells] = useState(initialCells);
+
+	const resetSession = () => {
+		setMyId(null);
+		setOpponentId(null);
+		setCurrentGameId(null);
+		setIsHost(false);
+		setIsMyTurn(false);
+		setWinner(null);
+		setOpponentLeft(false);
+		setCells(initialCells);
+	};
+
+	const resetBoard = () => {
+		setIsMyTurn(false);
+		setWinner(null);
+		setCells(initialCells);
+	};
 
 	const store = {
 		myId: [myId, setMyId],
@@ -19,6 +38,9 @@ export const StoreProvider = ({ children }) => {
 		isMyTurn: [isMyTurn, setIsMyTurn],
 		winner: [winner, setWinner],
 		opponentLeft: [opponentLeft, setOpponentLeft],
+		cells: [cells, setCells],
+		resetSession: [resetSession],
+		resetBoard: [resetBoard],
 	};
 
 	return (

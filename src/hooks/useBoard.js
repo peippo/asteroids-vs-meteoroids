@@ -1,11 +1,10 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { SocketContext } from "../services/socket";
 import { StoreContext } from "../store";
 import { useLocation } from "wouter";
-import { initialCells } from "../utils";
 import {
 	OPPONENT_LEFT,
-	RESET_GAME,
+	RESET_BOARD,
 	SUBMIT_TURN,
 	TURN_INFO,
 	WINNER_FOUND,
@@ -20,9 +19,9 @@ const useBoard = () => {
 		currentGameId: [currentGameId],
 		winner: [winner, setWinner],
 		opponentLeft: [, setOpponentLeft],
+		cells: [cells, setCells],
+		resetBoard: [resetBoard],
 	} = useContext(StoreContext);
-
-	const [cells, setCells] = useState(initialCells);
 
 	const handleUnitClick = (index) => {
 		if (!isMyTurn || winner) return;
@@ -56,10 +55,8 @@ const useBoard = () => {
 			setWinner(winnerId);
 		};
 
-		const resetGameListener = () => {
-			setOpponentLeft(null);
-			setWinner(null);
-			setCells(initialCells);
+		const resetBoardListener = () => {
+			resetBoard();
 		};
 
 		const opponentLeftListener = () => {
@@ -68,16 +65,24 @@ const useBoard = () => {
 
 		socket.on(TURN_INFO, turnInfoListener);
 		socket.on(WINNER_FOUND, winnerListener);
-		socket.on(RESET_GAME, resetGameListener);
+		socket.on(RESET_BOARD, resetBoardListener);
 		socket.on(OPPONENT_LEFT, opponentLeftListener);
 
 		return () => {
 			socket.off(TURN_INFO, turnInfoListener);
 			socket.off(WINNER_FOUND, winnerListener);
-			socket.off(RESET_GAME, resetGameListener);
+			socket.off(RESET_BOARD, resetBoardListener);
 			socket.off(OPPONENT_LEFT, opponentLeftListener);
 		};
-	}, [socket, myId, setIsMyTurn, setWinner, setOpponentLeft]);
+	}, [
+		socket,
+		myId,
+		setIsMyTurn,
+		setWinner,
+		setOpponentLeft,
+		resetBoard,
+		setCells,
+	]);
 
 	return [cells, handleUnitClick];
 };
