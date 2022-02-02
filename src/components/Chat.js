@@ -44,6 +44,7 @@ const Chat = () => {
 					onChange={handleChange}
 					maxLength="40"
 					autoComplete="off"
+					placeholder="Chat message"
 				/>
 				<Button type="submit">
 					<StyledSubmitIcon />
@@ -99,8 +100,9 @@ const Label = styled.label`
 `;
 
 const StyledChatIcon = styled(ChatIcon)`
-	width: 32px;
-	height: 32px;
+	width: 28px;
+	height: 28px;
+	margin-top: 5px;
 `;
 
 const StyledSubmitIcon = styled(SubmitIcon)`
