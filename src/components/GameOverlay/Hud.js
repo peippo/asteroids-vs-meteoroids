@@ -2,12 +2,8 @@ import { useContext } from "react";
 import styled, { css } from "styled-components";
 import { StoreContext } from "../../store";
 import { ReactComponent as ArrowIcon } from "../../icons/caret-right-solid.svg";
-import useResetSession from "../../hooks/useResetSession";
 
 const Hud = () => {
-	// Reset session on component unmount
-	useResetSession();
-
 	const {
 		isMyTurn: [isMyTurn],
 		winner: [winner],
