@@ -110,7 +110,7 @@ const PlayerTab = styled.div`
 			? "3px solid var(--color-light-green)"
 			: "3px solid transparent"};
 	padding: 0 1.25rem;
-	min-width: 150px;
+	min-width: 120px;
 	height: 50px;
 	border-radius: ${({ position }) =>
 		position === "left" ? "0 0 0 5px" : "0 0 5px 0"};
@@ -120,6 +120,10 @@ const PlayerTab = styled.div`
 		position === "right" ? "1px solid rgb(27 36 52 / 100%)" : "0"};
 	transition: all 0.3s;
 	box-shadow: 0 0 50px rgb(8 181 8 / 15%);
+
+	@media (min-width: 600px) {
+		min-width: 150px;
+	}
 
 	span {
 		font-weight: var(--heading-font-weight);

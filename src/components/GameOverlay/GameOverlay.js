@@ -3,6 +3,7 @@ import { StoreContext } from "../../store";
 import GameEndScreen from "./GameEndScreen";
 import PlayerLeftScreen from "./PlayerLeftScreen";
 import Hud from "./Hud";
+import QuitButton from "./QuitButton";
 
 const GameOverlay = () => {
 	const {
@@ -13,6 +14,7 @@ const GameOverlay = () => {
 	return (
 		<div>
 			<Hud />
+			<QuitButton />
 			{winner && !opponentLeft && <GameEndScreen />}
 			{opponentLeft && <PlayerLeftScreen />}
 		</div>
