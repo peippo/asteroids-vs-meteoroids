@@ -1,7 +1,5 @@
 <img src="https://asteroids-vs-meteoroids.surge.sh/banner.png" alt="Banner image">
 
-# Asteroids vs. Meteoroids
-
 Decimate your opponents in a thrilling intergalactic space battle between good and evil and conquer the galaxy... ok fine, it's just tic-tac-toe.
 
 ### <a href="https://asteroids-vs-meteoroids.surge.sh/">Open the project</a>
