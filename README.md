@@ -6,8 +6,6 @@ Decimate your opponents in a thrilling intergalactic space battle between good a
 
 Note: the server is running on Heroku and is probably sleeping, it will take a short while to wake up.
 
-<img src="https://asteroids-vs-meteoroids.surge.sh/screenshot.png" alt="Screenshot">
-
 ## Tech
 
 -  [React](https://reactjs.org/)
@@ -16,6 +14,8 @@ Note: the server is running on Heroku and is probably sleeping, it will take a s
 -  [Socket.io](https://github.com/socketio/socket.io) - Real-time communication between browser and server
 
 The Node.js server repository is at [asteroids-vs-meteoroids-server](https://github.com/peippo/asteroids-vs-meteoroids-server).
+
+<img src="https://asteroids-vs-meteoroids.surge.sh/screenshot.png" alt="Screenshot">
 
 ## Client/server communication flowchart
 
