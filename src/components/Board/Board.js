@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 import useBoard from "../../hooks/useBoard";
 import { boardPositions } from "../../utils";
 import BoardGridCell from "./BoardGridCell";
@@ -19,13 +19,14 @@ const Board = () => {
 			{cells.map((type, index) => {
 				return (
 					<Fragment key={index}>
-						<BoardUnit
-							index={index}
-							type={type}
-							position={boardPositions[index]}
-							handleUnitClick={handleUnitClick}
-						/>
-						)
+						<Suspense fallback={null}>
+							<BoardUnit
+								index={index}
+								type={type}
+								position={boardPositions[index]}
+								handleUnitClick={handleUnitClick}
+							/>
+						</Suspense>
 					</Fragment>
 				);
 			})}
