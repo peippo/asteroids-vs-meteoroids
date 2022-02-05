@@ -18,7 +18,7 @@ const useBoard = () => {
 		isMyTurn: [isMyTurn, setIsMyTurn],
 		currentGameId: [currentGameId],
 		winner: [winner, setWinner],
-		opponentLeft: [, setOpponentLeft],
+		hasOpponentLeft: [, setHasOpponentLeft],
 		cells: [cells, setCells],
 		resetBoard: [resetBoard],
 	} = useContext(StoreContext);
@@ -60,7 +60,7 @@ const useBoard = () => {
 		};
 
 		const opponentLeftListener = () => {
-			setOpponentLeft(true);
+			setHasOpponentLeft(true);
 		};
 
 		socket.on(TURN_INFO, turnInfoListener);
@@ -79,7 +79,7 @@ const useBoard = () => {
 		myId,
 		setIsMyTurn,
 		setWinner,
-		setOpponentLeft,
+		setHasOpponentLeft,
 		resetBoard,
 		setCells,
 	]);

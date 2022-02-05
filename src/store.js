@@ -10,7 +10,7 @@ export const StoreProvider = ({ children }) => {
 	const [isHost, setIsHost] = useState(false);
 	const [isMyTurn, setIsMyTurn] = useState(false);
 	const [winner, setWinner] = useState(null);
-	const [opponentLeft, setOpponentLeft] = useState(false);
+	const [hasOpponentLeft, setHasOpponentLeft] = useState(false);
 	const [cells, setCells] = useState(initialCells);
 
 	const resetSession = () => {
@@ -20,7 +20,7 @@ export const StoreProvider = ({ children }) => {
 		setIsHost(false);
 		setIsMyTurn(false);
 		setWinner(null);
-		setOpponentLeft(false);
+		setHasOpponentLeft(false);
 		setCells(initialCells);
 	};
 
@@ -37,7 +37,7 @@ export const StoreProvider = ({ children }) => {
 		isHost: [isHost, setIsHost],
 		isMyTurn: [isMyTurn, setIsMyTurn],
 		winner: [winner, setWinner],
-		opponentLeft: [opponentLeft, setOpponentLeft],
+		hasOpponentLeft: [hasOpponentLeft, setHasOpponentLeft],
 		cells: [cells, setCells],
 		resetSession: [resetSession],
 		resetBoard: [resetBoard],

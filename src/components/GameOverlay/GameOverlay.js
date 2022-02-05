@@ -12,15 +12,15 @@ const GameOverlay = () => {
 
 	const {
 		winner: [winner],
-		opponentLeft: [opponentLeft],
+		hasOpponentLeft: [hasOpponentLeft],
 	} = useContext(StoreContext);
 
 	return (
 		<div>
 			<Hud />
 			<QuitButton />
-			{winner && !opponentLeft && <GameEndScreen />}
-			{opponentLeft && <PlayerLeftScreen />}
+			{winner && !hasOpponentLeft && <GameEndScreen />}
+			{hasOpponentLeft && <PlayerLeftScreen />}
 		</div>
 	);
 };
