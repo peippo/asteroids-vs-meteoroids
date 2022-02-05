@@ -149,6 +149,7 @@ button:hover:after {
 	border: 2px solid var(--color-light-green);
 }
 
+.button--disabled,
 button:disabled {
 	background: var(--hud-background);
 	text-shadow: none;
@@ -156,15 +157,18 @@ button:disabled {
 	box-shadow: none;
 }
 
+.button--disabled:after,
 button:disabled:after {
 	border: 2px solid var(--color-white);
 	opacity: 0.3;
 }
 
+.button--disabled:hover:after,
 button:disabled:hover:after {
 	border: 2px solid var(--color-white);
 }
 
+.button--disabled:hover,
 button:disabled:hover {
 	cursor: not-allowed;
 	box-shadow: none;

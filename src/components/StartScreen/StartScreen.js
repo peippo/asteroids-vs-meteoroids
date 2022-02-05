@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { Link } from "wouter";
 import Modal from "../Modal";
+import { ReactComponent as SnoozeIcon } from "../../icons/snooze-solid.svg";
+import useConnectionStatus from "../../hooks/useConnectionStatus";
 
 const StartScreen = () => {
+	const isConnected = useConnectionStatus();
+
 	return (
 		<Modal>
 			<Logo src="/logo.png" alt="Asteroids vs. Meteoroids" />
@@ -13,14 +17,32 @@ const StartScreen = () => {
 				</Fieldset>
 				<Fieldset>
 					<Legend>Multiplayer</Legend>
-					<Link className="button" to={`/host`}>
+					<Link
+						className={`${
+							isConnected ? "button" : "button button--disabled"
+						}`}
+						to={`${isConnected ? "/host" : "/"}`}
+					>
 						Host a game
 					</Link>
-					<Link className="button" to={`/join`}>
+					<Link
+						className={`${
+							isConnected ? "button" : "button button--disabled"
+						}`}
+						to={`${isConnected ? "/join" : "/"}`}
+					>
 						Join a game
 					</Link>
 				</Fieldset>
 			</Wrapper>
+			{!isConnected && (
+				<>
+					<IconWrapper>
+						<StyledSnoozeIcon />
+						<ErrorText>Waking up the server, please wait...</ErrorText>
+					</IconWrapper>
+				</>
+			)}
 		</Modal>
 	);
 };
@@ -66,6 +88,26 @@ const Legend = styled.legend`
 	font-size: 1.25rem;
 	font-weight: var(--heading-font-weight);
 	color: var(--color-white);
+`;
+
+const ErrorText = styled.h2`
+	color: var(--color-red);
+	font-size: 1rem;
+	margin: 0;
+	text-transform: none;
+`;
+
+const IconWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 2rem 0 0 0;
+`;
+
+const StyledSnoozeIcon = styled(SnoozeIcon)`
+	width: 28px;
+	color: var(--color-red);
 `;
 
 export default StartScreen;

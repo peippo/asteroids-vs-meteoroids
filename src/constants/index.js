@@ -15,3 +15,4 @@ export const OPPONENT_LEFT = "OPPONENT_LEFT";
 export const QUIT_GAME = "QUIT_GAME";
 export const SUBMIT_MESSAGE = "SUBMIT_MESSAGE";
 export const NEW_MESSAGE = "NEW_MESSAGE";
+export const CONNECTED = "CONNECTED";
