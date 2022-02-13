@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 	bottom: 10px;
 	left: 10px;
 	display: flex;
-	z-index: 1;
+	z-index: 20;
 
 	&:hover span {
 		transition-delay: 0.25s;
