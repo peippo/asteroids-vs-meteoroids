@@ -1,18 +1,20 @@
 import styled from "styled-components";
-import { Link } from "wouter";
+import useQuitSession from "../../hooks/useQuitSession";
 import { ReactComponent as QuitIcon } from "../../icons/times-octagon-solid.svg";
 import Tooltip from "../Tooltip";
 
 const QuitButton = () => {
+	const quitSession = useQuitSession();
+
 	return (
-		<StyledLink className="button" to={`/`}>
+		<StyledButton onClick={() => quitSession()}>
 			<StyledQuitIcon />
 			<Tooltip>Quit game</Tooltip>
-		</StyledLink>
+		</StyledButton>
 	);
 };
 
-const StyledLink = styled(Link)`
+const StyledButton = styled.button`
 	position: absolute;
 	top: 10px;
 	left: 10px;
