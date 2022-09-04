@@ -15,7 +15,7 @@ const Game = () => {
 	const ContextBridge = useContextBridge(StoreContext, SocketContext);
 
 	return (
-		<Canvas invalidateFrameloop={true}>
+		<Canvas>
 			<ContextBridge>
 				<Controls />
 				<ambientLight />

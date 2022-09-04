@@ -12,7 +12,7 @@ const Board = () => {
 			{boardPositions.map((position, index) => {
 				return (
 					<Fragment key={index}>
-						<BoardGridCell position={position} />)
+						<BoardGridCell position={position} />
 					</Fragment>
 				);
 			})}
